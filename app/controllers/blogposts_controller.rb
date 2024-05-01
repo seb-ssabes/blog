@@ -16,4 +16,19 @@ class BlogpostsController < ApplicationController
   def new
     @blogpost = Blogpost.new
   end
+
+  def create
+    @blogpost = Blogpost.new(blogpost_params)
+    if @blogpost.save
+      redirect_to @blogpost
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
+  private
+
+  def blogpost_params
+    params.require(:blogpost).permit(:title, :body)
+  end
 end
