@@ -3,12 +3,11 @@ class BlogpostsController < ApplicationController
   before_action :set_blogpost, except: [:index, :new, :create ] # or only: [:show, :edit, :update, :destroy]
 
   def index
-    @blogposts = Blogpost.all
+    @blogposts = Blogpost.published
   end
 
   def show
-  rescue ActiveRecord::RecordNotFound
-    redirect_to root_path
+    @blogpost = Blogpost.published.find(params[:id])
   end
 
   def new
@@ -43,11 +42,11 @@ class BlogpostsController < ApplicationController
   private
 
   def blogpost_params
-    params.require(:blogpost).permit(:title, :body)
+    params.require(:blogpost).permit(:title, :body, :published_at)
   end
 
   def set_blogpost
-    @blogpost = Blogpost.find(params[:id])
+    @blogpost = user_signed_in? ? Blogpost.find(params[:id]) : @blogpost = Blogpost.published.find(params[:id])
   rescue ActiveRecord::RecordNotFound
     redirect_to root_path
   end
