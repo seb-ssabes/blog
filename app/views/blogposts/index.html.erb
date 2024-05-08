@@ -1,7 +1,12 @@
 <h1>My blog</h1>
 <% @blogposts.each do |blogpost| %>
   <div>
-  <h2><%= link_to blogpost.title, blogpost %></h2>
-  <%= blogpost.body %>
+    <h2><%= link_to blogpost.title, blogpost %></h2>
+      <% if blogpost.draft?  %>
+        <div class="p-2 rounded bg-gray-100 text-gray-900">Draft</div>
+      <% elsif blogpost.scheduled?  %>
+        <div class="p-2 rounded bg-green-100 text-gray-900">Draft</div>
+      <% end %>
+    <%= blogpost.body %>
   </div>
 <% end  %>
