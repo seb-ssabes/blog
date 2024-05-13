@@ -2,7 +2,7 @@ class Blogpost < ApplicationRecord
   has_rich_text :content
 
   validates :title, presence: true
-  validates :body, presence: true
+  validates :content, presence: true
 
   scope :sorted, -> { order(arel_table[:published_at].desc.nulls_last).order(updated_at: :desc) } # Pure ruby for a sql query
   scope :draft, -> { where(published_at: nil) }
