@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby "3.1.2"
+ruby "~> 3.2.2"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.3", ">= 7.1.3.2"
@@ -73,4 +73,3 @@ gem "devise", "~> 4.9"
 gem "tailwindcss-rails", "~> 2.6"
 
 gem "aws-sdk-s3", require: false
-
